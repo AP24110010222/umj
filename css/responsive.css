@@ -1,0 +1,266 @@
+/* ==========================================================================
+   UMA MAHESHWARI JEWELLERS - Responsive & Mobile-First Media Queries
+   ========================================================================== */
+
+/* Large Screens & Desktops */
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 32px;
+  }
+}
+
+/* Tablets (landscape and portrait) */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 72px;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-main-img {
+    height: 380px;
+  }
+
+  .about-badge-card {
+    right: 16px;
+    bottom: -16px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .modal-body-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 12px;
+  }
+
+  .admin-main {
+    padding: 24px 16px;
+  }
+
+  .stats-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 64px; /* Space for mobile sticky action bar */
+  }
+
+  .mobile-sticky-bar {
+    display: block;
+  }
+
+  /* Hamburger Navigation */
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: calc(var(--header-height) + var(--ticker-height));
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height) - var(--ticker-height));
+    background: rgba(7, 7, 10, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 999;
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  .nav-link {
+    font-size: 1.35rem;
+    font-family: var(--font-royal);
+  }
+
+  .hero-section {
+    padding: 50px 16px;
+    min-height: 80vh;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-tagline {
+    font-size: 1.15rem;
+  }
+
+  .hero-address {
+    font-size: 0.88rem;
+    padding: 6px 14px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .collection-card {
+    height: 200px;
+  }
+
+  .collection-info {
+    padding: 14px;
+  }
+
+  .collection-name {
+    font-size: 1.1rem;
+  }
+
+  /* 2 columns on standard mobile, 1 column on small phones */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .product-details {
+    padding: 14px;
+  }
+
+  .product-title {
+    font-size: 0.98rem;
+  }
+
+  .product-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .product-price {
+    font-size: 0.95rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .stats-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .gold-rate-container {
+    justify-content: center;
+  }
+
+  .rate-phone-link {
+    display: none;
+  }
+}
+
+/* Small Mobile Screens (e.g. iPhone SE / < 480px) */
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-card {
+    height: 180px;
+  }
+
+  .brand-name {
+    font-size: 0.96rem;
+    letter-spacing: 0.08em;
+  }
+
+  .logo-symbol {
+    width: 38px;
+    height: 38px;
+  }
+
+  .rate-items {
+    gap: 12px;
+    font-size: 0.74rem;
+  }
+}

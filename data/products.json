@@ -1,0 +1,312 @@
+{
+  "goldRates": {
+    "rate22K": 6650,
+    "rate24K": 7255,
+    "lastUpdated": "2026-09-18"
+  },
+  "categories": [
+    {
+      "id": "chains",
+      "name": "Chains",
+      "icon": "fa-link",
+      "description": "Classic and modern gold chains in 22K purity for daily wear and festive occasions."
+    },
+    {
+      "id": "rings",
+      "name": "Rings",
+      "icon": "fa-ring",
+      "description": "Handcrafted gold rings, cocktail designs, and gemstone studded statement pieces."
+    },
+    {
+      "id": "bracelets",
+      "name": "Bracelets",
+      "icon": "fa-gem",
+      "description": "Modern cuff, link, and tennis style gold bracelets crafted with precision."
+    },
+    {
+      "id": "necklaces",
+      "name": "Necklaces",
+      "icon": "fa-heart",
+      "description": "Exquisite chokers, layered harams, and traditional South Indian necklace sets."
+    },
+    {
+      "id": "earrings",
+      "name": "Earrings",
+      "icon": "fa-sparkles",
+      "description": "Intricate jhumkas, modern studs, chandbalis, and sui dhaga designs."
+    },
+    {
+      "id": "bangles",
+      "name": "Bangles",
+      "icon": "fa-circle-notch",
+      "description": "Traditional kadas, temple bangles, and everyday sleek gold valayal pairs."
+    },
+    {
+      "id": "pendants",
+      "name": "Pendants",
+      "icon": "fa-sun",
+      "description": "Sacred deity motifs, floral charms, and contemporary minimalist gold pendants."
+    },
+    {
+      "id": "bridal-jewellery",
+      "name": "Bridal Jewellery",
+      "icon": "fa-crown",
+      "description": "Grand bridal sets, antique temple jewellery, and heirloom wedding collections."
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-chain-01",
+      "name": "Classic Traditional Gold Rope Chain",
+      "category": "chains",
+      "images": [
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1611591475155-4284fa2c2e7f?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "24.50 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Timeless hand-interlocked rope pattern gold chain crafted in 22 Karat 916 hallmarked pure gold. Sturdy clasp mechanism suitable for both formal celebrations and auspicious occasions.",
+      "featured": true,
+      "createdAt": "2026-09-10T10:00:00.000Z"
+    },
+    {
+      "id": "prod-chain-02",
+      "name": "Royal Franco Link Solid Chain",
+      "category": "chains",
+      "images": [
+        "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "32.10 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Bold square Franco weave chain offering superior durability and a radiant golden luster. Ideal for heavy pendants or standalone wear.",
+      "featured": false,
+      "createdAt": "2026-09-11T12:00:00.000Z"
+    },
+    {
+      "id": "prod-chain-03",
+      "name": "Sleek Singapore Wave Chain",
+      "category": "chains",
+      "images": [
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "8.80 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Delicate twisted Singapore curb links that catch and reflect light with every subtle movement. Lightweight and comfortable for daily elegance.",
+      "featured": false,
+      "createdAt": "2026-09-12T14:30:00.000Z"
+    },
+    {
+      "id": "prod-ring-01",
+      "name": "Royal Emerald Cut Solitaire Gold Ring",
+      "category": "rings",
+      "images": [
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "7.40 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "An opulent statement ring adorned with high-clarity simulated emerald and precision-cut accents on a sculpted 22K yellow gold band.",
+      "featured": true,
+      "createdAt": "2026-09-08T09:15:00.000Z"
+    },
+    {
+      "id": "prod-ring-02",
+      "name": "Antique Filigree Floral Cocktail Ring",
+      "category": "rings",
+      "images": [
+        "https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "11.20 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Intricate heritage craftsmanship featuring hand-carved floral filigree petals in antique gold finish, designed for festive celebrations.",
+      "featured": false,
+      "createdAt": "2026-09-09T11:00:00.000Z"
+    },
+    {
+      "id": "prod-ring-03",
+      "name": "Traditional Navratna Auspicious Ring",
+      "category": "rings",
+      "images": [
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "9.60 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Nine sacred planetary gems set in an authentic Vedic circular harmony setting on pure hallmarked gold.",
+      "featured": false,
+      "createdAt": "2026-09-10T15:00:00.000Z"
+    },
+    {
+      "id": "prod-bracelet-01",
+      "name": "Heritage Peacock Carved Kada Bracelet",
+      "category": "bracelets",
+      "images": [
+        "https://images.unsplash.com/photo-1611591475155-4284fa2c2e7f?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "28.50 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Openable royal cuff bracelet featuring dual majestic peacock head finials crowned with ruby colored stones and embossed detailing.",
+      "featured": true,
+      "createdAt": "2026-09-07T16:20:00.000Z"
+    },
+    {
+      "id": "prod-bracelet-02",
+      "name": "Modern Geometric Mesh Gold Bracelet",
+      "category": "bracelets",
+      "images": [
+        "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "16.80 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Flexible luxury mesh link bracelet with a polished satin finish and concealed double safety lock.",
+      "featured": false,
+      "createdAt": "2026-09-08T18:00:00.000Z"
+    },
+    {
+      "id": "prod-necklace-01",
+      "name": "Maharani Kasu Mala Heritage Necklace",
+      "category": "necklaces",
+      "images": [
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "68.40 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Classic South Indian Goddess Lakshmi coin necklace (Kasu Mala) crafted with utmost devotion and traditional embossed temple work.",
+      "featured": true,
+      "createdAt": "2026-09-05T10:00:00.000Z"
+    },
+    {
+      "id": "prod-necklace-02",
+      "name": "Grand Royal Polki Choker Set",
+      "category": "necklaces",
+      "images": [
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "54.20 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Exquisite close-neck choker studded with uncut polki stones, emerald bead drops, and intricate Meenakari enamel on the reverse.",
+      "featured": true,
+      "createdAt": "2026-09-06T12:00:00.000Z"
+    },
+    {
+      "id": "prod-necklace-03",
+      "name": "Contemporary Floral Wave Gold Necklace",
+      "category": "necklaces",
+      "images": [
+        "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "36.50 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Curved asymmetrical wave pattern interlaced with micro-faceted yellow gold flowers. Sits elegantly on the collarbone.",
+      "featured": false,
+      "createdAt": "2026-09-07T14:00:00.000Z"
+    },
+    {
+      "id": "prod-earring-01",
+      "name": "Temple Chandbali Jhumka Earrings",
+      "category": "earrings",
+      "images": [
+        "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "21.60 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Two-tiered traditional chandelier earrings combining the grandeur of crescent Chandbalis with dangling bell jhumkas and pearl clusters.",
+      "featured": true,
+      "createdAt": "2026-09-04T11:00:00.000Z"
+    },
+    {
+      "id": "prod-earring-02",
+      "name": "Classic 22K Peacock Stud Earrings",
+      "category": "earrings",
+      "images": [
+        "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "7.80 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Comfortable screw-back daily wear studs highlighting embossed miniature peacock plumage with ruby accents.",
+      "featured": false,
+      "createdAt": "2026-09-05T13:00:00.000Z"
+    },
+    {
+      "id": "prod-bangle-01",
+      "name": "Antique Lakshmi Embossed Bangle Pair",
+      "category": "bangles",
+      "images": [
+        "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "48.20 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "A pair of grand antique finished gold temple bangles adorned with repeating motifs of Goddess Lakshmi seated upon lotus blooms.",
+      "featured": true,
+      "createdAt": "2026-09-03T10:00:00.000Z"
+    },
+    {
+      "id": "prod-bangle-02",
+      "name": "Modern Cut-Work Daily Gold Valayal (Set of 4)",
+      "category": "bangles",
+      "images": [
+        "https://images.unsplash.com/photo-1611591475155-4284fa2c2e7f?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "34.00 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Four slender yet durable diamond-cut gold bangles that shimmer brilliantly with wrist movement. Specially fortified for everyday wear.",
+      "featured": false,
+      "createdAt": "2026-09-04T12:00:00.000Z"
+    },
+    {
+      "id": "prod-pendant-01",
+      "name": "Divine Ganesha Temple Pendant",
+      "category": "pendants",
+      "images": [
+        "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "12.40 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Auspicious Lord Ganesha idol carved with lifelike precision in 22K yellow gold, framed by an archway of fine beadwork and ruby drops.",
+      "featured": true,
+      "createdAt": "2026-09-02T10:00:00.000Z"
+    },
+    {
+      "id": "prod-pendant-02",
+      "name": "Floral Peacock Locket Pendant",
+      "category": "pendants",
+      "images": [
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "9.10 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Delicately filigreed teardrop pendant featuring dancing peacocks in high relief, perfect for wearing with gold chains.",
+      "featured": false,
+      "createdAt": "2026-09-03T15:00:00.000Z"
+    },
+    {
+      "id": "prod-bridal-01",
+      "name": "Auspicious Vivaha Heritage Bridal Haram Set",
+      "category": "bridal-jewellery",
+      "images": [
+        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "112.50 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "The crown jewel of our bridal collection. An opulent heirloom wedding set comprising a grand long haram, coordinating choker, matching heavy chandbalis, and maang tikka, handcrafted by master artisans for the royal bride.",
+      "featured": true,
+      "createdAt": "2026-09-01T09:00:00.000Z"
+    },
+    {
+      "id": "prod-bridal-02",
+      "name": "Traditional South Indian Vaddanam (Waist Belt)",
+      "category": "bridal-jewellery",
+      "images": [
+        "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "weight": "95.00 gms",
+      "purity": "22K 916 BIS Hallmarked",
+      "description": "Grand bridal gold waist belt with detailed depictions of Ashta Lakshmi, embellished with authentic south sea pearls and crimson rubies.",
+      "featured": true,
+      "createdAt": "2026-09-02T14:00:00.000Z"
+    }
+  ]
+}
