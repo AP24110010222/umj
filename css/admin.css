@@ -442,3 +442,120 @@
   font-size: 0.95rem;
   color: var(--gold-champagne);
 }
+
+/* ==========================================================================
+   Admin Auth Modal & Session Controls
+   ========================================================================== */
+.admin-auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 12, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.admin-auth-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.admin-auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: #111118;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-md);
+  padding: 40px 32px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.12);
+  position: relative;
+  animation: authCardEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes authCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.admin-auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.admin-auth-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--gold-primary);
+  font-size: 1.5rem;
+}
+
+.admin-auth-header h2 {
+  font-family: var(--font-royal);
+  font-size: 1.35rem;
+  color: var(--gold-champagne);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.admin-auth-header p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.admin-auth-error {
+  background: rgba(255, 82, 82, 0.12);
+  border: 1px solid rgba(255, 82, 82, 0.35);
+  color: #ff8a80;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  margin-bottom: 20px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-auth-error.show {
+  display: flex;
+}
+
+.admin-user-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 6px 14px;
+  border-radius: 30px;
+}
+
+.admin-user-email {
+  color: var(--gold-champagne);
+  font-size: 0.82rem;
+  font-weight: 500;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

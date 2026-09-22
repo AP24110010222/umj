@@ -440,4 +440,126 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderProductsTable();
   updateStats();
   renderCategoriesManager();
+
+  // 10. Supabase Authentication System
+  const SUPABASE_URL = "https://bppqkiworrqjgkwiebjw.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwcHFraXdvcnJxamdrd2llYmp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwMDY5NTMsImV4cCI6MjEwNTU4Mjk1M30.7zofbcEriTkALRj6YX6ScQnfs5g0MYLOUb6nIPTU2_g";
+
+  let supabaseClient = null;
+  const authOverlay = document.getElementById("admin-auth-overlay");
+  const loginForm = document.getElementById("admin-login-form");
+  const loginError = document.getElementById("admin-auth-error");
+  const loginErrorText = document.getElementById("admin-auth-error-text");
+  const loginSubmitBtn = document.getElementById("admin-login-submit");
+  const userInfoBadge = document.getElementById("admin-user-info");
+  const userDisplaySpan = document.getElementById("admin-user-display");
+  const logoutBtn = document.getElementById("admin-logout-btn");
+
+  if (window.supabase && typeof window.supabase.createClient === "function") {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  function showLoginModal(errorMsg = null) {
+    if (authOverlay) authOverlay.classList.remove("hidden");
+    if (userInfoBadge) userInfoBadge.style.display = "none";
+    if (errorMsg && loginError && loginErrorText) {
+      loginErrorText.textContent = errorMsg;
+      loginError.classList.add("show");
+    }
+  }
+
+  function hideLoginModal(userEmail) {
+    if (authOverlay) authOverlay.classList.add("hidden");
+    if (loginError) loginError.classList.remove("show");
+    if (userInfoBadge && userDisplaySpan) {
+      userDisplaySpan.textContent = userEmail || "Admin User";
+      userInfoBadge.style.display = "flex";
+    }
+  }
+
+  async function checkSession() {
+    if (!supabaseClient) {
+      if (authOverlay) authOverlay.classList.add("hidden");
+      return;
+    }
+
+    try {
+      const { data: { session }, error } = await supabaseClient.auth.getSession();
+      if (session && session.access_token) {
+        localStorage.setItem("supabase_token", session.access_token);
+        hideLoginModal(session.user?.email);
+      } else {
+        localStorage.removeItem("supabase_token");
+        showLoginModal();
+      }
+    } catch (err) {
+      console.warn("Session check error:", err);
+      showLoginModal();
+    }
+  }
+
+  // Handle Login
+  if (loginForm && supabaseClient) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("admin-email").value.trim();
+      const password = document.getElementById("admin-password").value;
+
+      if (!email || !password) return;
+
+      if (loginSubmitBtn) {
+        loginSubmitBtn.disabled = true;
+        loginSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+      }
+      if (loginError) loginError.classList.remove("show");
+
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) {
+          showLoginModal(error.message || "Invalid login credentials.");
+        } else if (data.session) {
+          localStorage.setItem("supabase_token", data.session.access_token);
+          hideLoginModal(data.user?.email);
+          notify(`Welcome back, ${data.user?.email || "Admin"}!`, "fa-shield-halved");
+          await Store.init();
+          populateCategoryDropdowns();
+          renderProductsTable();
+          updateStats();
+          renderCategoriesManager();
+        }
+      } catch (err) {
+        showLoginModal("Authentication failed: " + err.message);
+      } finally {
+        if (loginSubmitBtn) {
+          loginSubmitBtn.disabled = false;
+          loginSubmitBtn.innerHTML = '<i class="fa-solid fa-lock-open"></i> Sign In to Portal';
+        }
+      }
+    });
+  }
+
+  // Handle Logout
+  if (logoutBtn && supabaseClient) {
+    logoutBtn.addEventListener("click", async () => {
+      await supabaseClient.auth.signOut();
+      localStorage.removeItem("supabase_token");
+      showLoginModal();
+      notify("Logged out from admin portal.", "fa-arrow-right-from-bracket");
+    });
+  }
+
+  // Listen to Auth state changes (token refresh, etc.)
+  if (supabaseClient) {
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (session && session.access_token) {
+        localStorage.setItem("supabase_token", session.access_token);
+      } else if (event === "SIGNED_OUT") {
+        localStorage.removeItem("supabase_token");
+        showLoginModal();
+      }
+    });
+  }
+
+  // Check auth session
+  await checkSession();
 });

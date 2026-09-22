@@ -84,21 +84,38 @@ A modern, premium, and elegant jewellery showroom web application designed speci
 
 ---
 
-## 🚀 How to Run the Website
+## 🚀 Running and Deploying
 
-### Option 1: Using the Python Backend (Recommended)
+### Local Development (Node.js)
 ```bash
-cd /Users/akhil/Downloads/umj
-python3 server.py
+npm install
+npm start
 ```
 
 Then open your browser to:
 - **Customer Showroom**: [http://localhost:8000/index.html](http://localhost:8000/index.html)
 - **Owner Admin Portal**: [http://localhost:8000/admin.html](http://localhost:8000/admin.html)
 
-### Option 2: Static Hosting / Direct Browser Opening
-The website features a **Dual-Engine Persistence system**:
-If opened without the Python backend (e.g., deployed to GitHub Pages, Netlify, Vercel, or opened directly), it uses browser `localStorage` and `IndexedDB` with the built-in seed catalogue from `data/products.json`. All admin edits, new products, and gold rates will persist seamlessly!
+### Production Deployment Architecture
+- **Backend (Render)**:
+  - Runtime: **Node.js**
+  - Build Command: `npm install`
+  - Start Command: `npm start`
+  - Health check path: `/healthz`
+  - Environment Variables (configured in Render Dashboard):
+    - `SUPABASE_URL`
+    - `SUPABASE_SERVICE_ROLE_KEY`
+    - `NEXT_PUBLIC_SUPABASE_URL`
+    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+    - `PORT=8000`
+- **Database & Storage (Supabase)**:
+  - PostgreSQL tables for `products`, `categories`, `gold_rates`.
+  - Supabase Storage bucket `product-images` for high-resolution jewellery photographs.
+  - Supabase Auth for JWT-secured admin actions.
+  - Run `schema.sql` once in the Supabase SQL Editor.
+- **Frontend (Vercel)**:
+  - Static hosting configured via `vercel.json`.
+  - Connect GitHub repository `AP24110010222/umj` directly to Vercel.
 
 ---
 
@@ -107,21 +124,25 @@ If opened without the Python backend (e.g., deployed to GitHub Pages, Netlify, V
 ```
 umj/
 ├── index.html              # Customer Showroom Website
-├── admin.html              # Owner Admin & Product Management Portal
-├── server.py               # Lightweight Python 3 API & static file server
-├── README.md               # Showroom documentation and guides
+├── admin.html              # Owner Admin Portal with Supabase Auth
+├── server.js               # Production Node.js Express REST API Server
+├── package.json            # Node.js dependencies & start scripts
+├── render.yaml             # Render Cloud Infrastructure as Code
+├── vercel.json             # Vercel Production Routing & Security Headers
+├── schema.sql              # Supabase PostgreSQL & Storage Bucket setup
+├── .env                    # Environment credentials (gitignored)
 ├── css/
 │   ├── style.css           # Luxury dark & gold aesthetic design system
-│   ├── admin.css           # Admin dashboard UI styling
+│   ├── admin.css           # Admin dashboard & login modal styling
 │   └── responsive.css      # Mobile-first adaptive layout styles
 ├── js/
 │   ├── app.js              # Customer showroom UI, filters, modal & WhatsApp links
-│   ├── admin.js            # Admin CRUD, photo uploader & category manager
+│   ├── admin.js            # Admin CRUD, Supabase Auth session & uploader
 │   ├── store.js            # Dual-sync data layer (API + LocalStorage fallback)
 │   └── particles.js        # Shimmering ambient gold dust particles
 ├── data/
 │   └── products.json       # Seed inventory database (8 categories & products)
-└── uploads/                # Directory for uploaded product images
+└── uploads/                # Directory for local fallback image uploads
 ```
 
 ---
@@ -132,3 +153,4 @@ umj/
 - **Phone**: 9966991008
 - **WhatsApp**: +91 9966991008
 - **Email**: umj.gold@gmail.com
+

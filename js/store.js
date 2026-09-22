@@ -1,29 +1,64 @@
 /**
- * Uma Maheshwari Jewellers - Central Data Store
- * Supports Dual-Engine persistence:
- * 1. REST API (when server.py is running)
- * 2. LocalStorage / IndexedDB fallback (when running statically or offline)
+ * Uma Maheshwari Jewellers - Central Data Store (Production Grade)
+ * Dual-Engine Persistence:
+ *  1. Express + Supabase REST API (when backend is available)
+ *  2. LocalStorage fallback (offline or static deployment)
+ * Automatic Authorization: Bearer <token> attached for mutating operations.
  */
 
 const Store = (function () {
   const STORAGE_KEY = "umj_jewellery_db_v1";
-// Helper to include Authorization header if JWT present
-function authHeaders() {
-  const token = localStorage.getItem('supabase_token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
+
+  // Dynamic API Base URL resolution
+  function getApiBase() {
+    if (window.UMJ_API_BASE) {
+      return window.UMJ_API_BASE.replace(/\/+$/, "");
+    }
+    const saved = localStorage.getItem("umj_api_base");
+    if (saved) {
+      return saved.replace(/\/+$/, "");
+    }
+    // If testing on a different local port (like 5500), point to 8000
+    if (window.location.hostname === "localhost" && window.location.port && window.location.port !== "8000") {
+      return "http://localhost:8000";
+    }
+    return "";
+  }
+
+  // Helper to include Authorization header if Supabase JWT is present
+  function authHeaders() {
+    const token = localStorage.getItem("supabase_token");
+    return token ? { "Authorization": `Bearer ${token}` } : {};
+  }
+
+  // Unified API fetch helper with base URL prepending
+  async function apiFetch(endpoint, options = {}) {
+    const base = getApiBase();
+    const url = `${base}${endpoint}`;
+    const headers = {
+      "Accept": "application/json",
+      ...(options.headers || {})
+    };
+
+    // Attach auth headers automatically on mutating methods
+    if (["POST", "PUT", "DELETE", "PATCH"].includes(options.method?.toUpperCase())) {
+      Object.assign(headers, authHeaders());
+    }
+
+    return fetch(url, { ...options, headers });
+  }
+
   let cache = {
     categories: [],
     products: [],
-    goldRates: { rate22K: 6650, rate24K: 7255, lastUpdated: "2026-09-18" }
+    goldRates: { rate22K: 6650, rate24K: 7255, lastUpdated: new Date().toISOString().split("T")[0] }
   };
 
   let isBackendAvailable = null;
 
   async function checkBackend() {
-    if (isBackendAvailable !== null) return isBackendAvailable;
     try {
-      const res = await fetch("/api/rates", { method: "GET", headers: { "Accept": "application/json" } });
+      const res = await apiFetch("/api/rates", { method: "GET" });
       isBackendAvailable = res.ok;
     } catch (e) {
       isBackendAvailable = false;
@@ -62,14 +97,32 @@ function authHeaders() {
   }
 
   return {
+    getApiBase,
+
+    setApiBase(url) {
+      if (!url) {
+        localStorage.removeItem("umj_api_base");
+      } else {
+        localStorage.setItem("umj_api_base", url.trim().replace(/\/+$/, ""));
+      }
+      isBackendAvailable = null;
+    },
+
     async init() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch("/api/products");
+          const res = await apiFetch("/api/products");
           if (res.ok) {
-            cache = await res.json();
-            setLocalData(cache); // mirror to local storage
+            const data = await res.json();
+            cache.products = data.products || [];
+            if (data.categories && data.categories.length > 0) {
+              cache.categories = data.categories;
+            }
+            if (data.goldRates) {
+              cache.goldRates = data.goldRates;
+            }
+            setLocalData(cache);
             return cache;
           }
         } catch (e) {
@@ -130,7 +183,7 @@ function authHeaders() {
     },
 
     getGoldRates() {
-      return cache.goldRates || { rate22K: 6650, rate24K: 7255, lastUpdated: "2026-09-18" };
+      return cache.goldRates || { rate22K: 6650, rate24K: 7255, lastUpdated: new Date().toISOString().split("T")[0] };
     },
 
     async uploadImage(fileOrBase64, filename = "jewel.jpg") {
@@ -149,7 +202,7 @@ function authHeaders() {
 
       if (hasBackend) {
         try {
-          const res = await fetch("/api/upload", {
+          const res = await apiFetch("/api/upload", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ image: base64String, filename })
@@ -171,7 +224,7 @@ function authHeaders() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch("/api/products", {
+          const res = await apiFetch("/api/products", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(productData)
@@ -208,7 +261,7 @@ function authHeaders() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch(`/api/products/${id}`, {
+          const res = await apiFetch(`/api/products/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updatedData)
@@ -239,7 +292,7 @@ function authHeaders() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+          const res = await apiFetch(`/api/products/${id}`, { method: "DELETE" });
           if (res.ok) {
             cache.products = cache.products.filter(p => p.id !== id);
             setLocalData(cache);
@@ -260,7 +313,7 @@ function authHeaders() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch("/api/categories", {
+          const res = await apiFetch("/api/categories", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: catId, name, description })
@@ -290,11 +343,31 @@ function authHeaders() {
       return newCat;
     },
 
+    async deleteCategory(id) {
+      const hasBackend = await checkBackend();
+      if (hasBackend) {
+        try {
+          const res = await apiFetch(`/api/categories/${id}`, { method: "DELETE" });
+          if (res.ok) {
+            cache.categories = cache.categories.filter(c => c.id !== id);
+            setLocalData(cache);
+            return true;
+          }
+        } catch (e) {
+          console.warn("Backend deleteCategory failed:", e);
+        }
+      }
+
+      cache.categories = cache.categories.filter(c => c.id !== id);
+      setLocalData(cache);
+      return true;
+    },
+
     async updateGoldRates(rates) {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          const res = await fetch("/api/rates", {
+          const res = await apiFetch("/api/rates", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(rates)
@@ -342,7 +415,7 @@ function authHeaders() {
       const hasBackend = await checkBackend();
       if (hasBackend) {
         try {
-          await fetch("/api/import", {
+          await apiFetch("/api/import", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(importedObject)
@@ -355,4 +428,5 @@ function authHeaders() {
     }
   };
 })();
+
 window.Store = Store;
