@@ -1,8 +1,8 @@
 {
   "goldRates": {
-    "rate22K": 6650,
-    "rate24K": 7255,
-    "lastUpdated": "2026-09-18"
+    "rate22K": 6650.0,
+    "rate24K": 7255.0,
+    "lastUpdated": "2026-09-23"
   },
   "categories": [
     {
@@ -81,19 +81,6 @@
       "description": "Bold square Franco weave chain offering superior durability and a radiant golden luster. Ideal for heavy pendants or standalone wear.",
       "featured": false,
       "createdAt": "2026-09-11T12:00:00.000Z"
-    },
-    {
-      "id": "prod-chain-03",
-      "name": "Sleek Singapore Wave Chain",
-      "category": "chains",
-      "images": [
-        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80"
-      ],
-      "weight": "8.80 gms",
-      "purity": "22K 916 BIS Hallmarked",
-      "description": "Delicate twisted Singapore curb links that catch and reflect light with every subtle movement. Lightweight and comfortable for daily elegance.",
-      "featured": false,
-      "createdAt": "2026-09-12T14:30:00.000Z"
     },
     {
       "id": "prod-ring-01",
